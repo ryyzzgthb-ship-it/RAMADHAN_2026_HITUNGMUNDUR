@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown Ramadhan 2026</title>
+
+<style>
+*{box-sizing:border-box}
+html, body{
+  width:100%;
+  height:100%;
+  margin:0;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  overflow:hidden;
+}
+
+/* LANGIT FULLSCREEN */
+#sky{
+  position:fixed;
+  inset:0;              /* FULLSCREEN */
+  width:100vw;
+  height:100vh;
+  z-index:-5;
+  transition:background 2s;
+}
+
+/* CENTER CONTENT */
+#center{
+  position:relative;
+  width:100%;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* MATAHARI & BULAN */
+#sun, #moon{
+  position:fixed;
+  top:30px;
+  right:30px;
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  display:none;
+}
+
+#sun{
+  background:radial-gradient(circle,#fff700,#ff9800);
+  box-shadow:0 0 40px #ffb300;
+}
+
+#moon{
+  background:#f5f3ce;
+  box-shadow:-12px 0 0 #020024, 0 0 25px #fff;
+}
+
+/* BINTANG */
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+  from{opacity:.2}
+  to{opacity:1}
+}
+
+/* BOX */
+#box{
+  width:95%;
+  max-width:900px;
+  padding:30px;
+  background:rgba(0,0,0,.55);
+  border-radius:20px;
+  text-align:center;
+  color:#eaffea;
+  box-shadow:0 0 20px rgba(0,255,0,.4);
+}
+
+/* ONLINE */
+#online{
+  color:#00ff66;
+  font-weight:bold;
+  margin-bottom:10px;
+  animation:pulse 1s infinite;
+}
+@keyframes pulse{
+  0%{opacity:.5}
+  50%{opacity:1}
+  100%{opacity:.5}
+}
+
+/* RUNNING TEXT RGB */
+.marquee{
+  overflow:hidden;
+  white-space:nowrap;
+  border-bottom:2px solid #00ff99;
+  padding-bottom:10px;
+  margin-bottom:20px;
+}
+
+.marquee span{
+  display:inline-block;
+  padding-left:100%;
+  font-size:20px;
+  font-weight:bold;
+  animation:marquee 10s linear infinite, rgb 3s linear infinite;
+}
+
+@keyframes marquee{
+  to{transform:translateX(-100%)}
+}
+
+@keyframes rgb{
+  0%{color:red}
+  20%{color:orange}
+  40%{color:yellow}
+  60%{color:lime}
+  80%{color:cyan}
+  100%{color:magenta}
+}
+
+h1{color:#aaffaa;font-size:32px}
+#countdown{font-size:26px;font-weight:bold}
+</style>
+</head>
+
+<body>
+
+<div id="sky"></div>
+<div id="sun"></div>
+<div id="moon"></div>
+
+<div id="center">
+  <div id="box">
+    <div id="online">● ONLINE</div>
+
+    <div class="marquee">
+      <span>🌙 Marhaban Ya Ramadhan 2026 • Persiapkan Iman & Amal • Selamat Menyambut Bulan Suci 🌙</span>
+    </div>
+
+    <h1>⏳ Countdown Ramadhan 2026</h1>
+    <div id="countdown">Loading...</div>
+  </div>
+</div>
+
+<script>
+const sky=document.getElementById("sky");
+const sun=document.getElementById("sun");
+const moon=document.getElementById("moon");
+const hour=new Date().getHours();
+
+/* LANGIT OTOMATIS */
+if(hour>=5 && hour<17){
+  sky.style.background="linear-gradient(#4facfe,#00f2fe)";
+  sun.style.display="block";
+}else{
+  sky.style.background="linear-gradient(#020024,#090979,#000)";
+  moon.style.display="block";
+
+  // BINTANG MALAM
+  for(let i=0;i<60;i++){
+    let s=document.createElement("div");
+    s.className="star";
+    s.style.left=Math.random()*innerWidth+"px";
+    s.style.top=Math.random()*innerHeight+"px";
+    s.style.animationDelay=Math.random()*2+"s";
+    document.body.appendChild(s);
+  }
+}
+
+/* COUNTDOWN */
+const target=new Date("February 18, 2026 00:00:00").getTime();
+setInterval(()=>{
+  const now=new Date().getTime();
+  const d=target-now;
+
+  if(d<=0){
+    countdown.innerHTML="🌙 Ramadhan Telah Tiba! 🌙";
+    return;
+  }
+
+  const day=Math.floor(d/(1000*60*60*24));
+  const h=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((d%(1000*60*60))/(1000*60));
+  const s=Math.floor((d%(1000*60))/1000);
+
+  countdown.innerHTML=
+  `${day} Hari : ${h} Jam : ${m} Menit : ${s} Detik`;
+},1000);
+</script>
+
+</body>
+</html>
+
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;">
+  <iframe
+    src="https://www.youtube.com/embed/hSVrJszp4w8?autoplay=1&loop=1&playlist=hSVrJszp4w8"
+    style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
